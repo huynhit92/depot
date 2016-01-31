@@ -2,6 +2,7 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
+    Rails.logger.error { "error in here" }
     @products = Product.all
 
     respond_to do |format|
@@ -13,6 +14,7 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
+    puts "Params #{params}"
     @product = Product.find(params[:id])
 
     respond_to do |format|
