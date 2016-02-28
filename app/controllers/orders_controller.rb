@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+  skip_before_filter :authorize
   # GET /orders
   # GET /orders.json
   def index
@@ -10,9 +11,10 @@ class OrdersController < ApplicationController
     end
   end
 
+
   # GET /orders/1
   # GET /orders/1.json
-  def show
+  def shows
     @order = Order.find(params[:id])
 
     respond_to do |format|

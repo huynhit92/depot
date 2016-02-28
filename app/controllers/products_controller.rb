@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
   def index
     Rails.logger.error { "error in here" }
     @products = Product.all
-
+    @cart = current_cart
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @products }
@@ -16,7 +16,7 @@ class ProductsController < ApplicationController
   def show
     puts "Params #{params}"
     @product = Product.find(params[:id])
-
+    @cart = current_cart
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @product }
@@ -27,7 +27,7 @@ class ProductsController < ApplicationController
   # GET /products/new.json
   def new
     @product = Product.new
-
+    @cart = current_cart
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @product }
@@ -37,13 +37,14 @@ class ProductsController < ApplicationController
   # GET /products/1/edit
   def edit
     @product = Product.find(params[:id])
+    @cart = current_cart
   end
 
   # POST /products
   # POST /products.json
   def create
     @product = Product.new(params[:product])
-
+    @cart = current_cart
     respond_to do |format|
       if @product.save
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
@@ -59,7 +60,7 @@ class ProductsController < ApplicationController
   # PUT /products/1.json
   def update
     @product = Product.find(params[:id])
-
+    @cart = current_cart
     respond_to do |format|
       if @product.update_attributes(params[:product])
         format.html { redirect_to @product, notice: 'Product was successfully updated.' }
@@ -76,7 +77,7 @@ class ProductsController < ApplicationController
   def destroy
     @product = Product.find(params[:id])
     @product.destroy
-
+    @cart = current_cart
     respond_to do |format|
       format.html { redirect_to products_url }
       format.json { head :no_content }
